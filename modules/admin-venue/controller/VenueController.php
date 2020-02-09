@@ -66,7 +66,7 @@ class VenueController extends \Admin\Controller
 
         $params['opts'] = $combiner->getOptions();
         
-        if(!($valid = $form->validate($venue)) /* || !$form->csrfTest('noob') */)
+        if(!($valid = $form->validate($venue)) || !$form->csrfTest('noob'))
             return $this->resp('venue/edit', $params);
 
         $valid = $combiner->finalize($valid);
