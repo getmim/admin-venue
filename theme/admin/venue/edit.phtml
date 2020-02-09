@@ -1,0 +1,125 @@
+<form  method="POST" class="needs-validation main" novalidate>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-shadow">
+        <div class="navbar-multiline mr-auto">
+            <span class="navbar-brand" href="#0">Venue Editor</span>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="<?= $this->router->to('adminHome') ?>">Home</a></li>
+                    <li class="breadcrumb-item"><a href="<?= $this->router->to('adminVenue') ?>">Venue</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><?= $subtitle ?></li>
+                </ol>
+            </nav>
+        </div>
+        <button class="btn btn-primary">Save</button>
+    </nav>
+
+    <div class="container p-3">
+        <div class="row mb-3">
+            <?= $form->csrfField('noob') ?>
+            <div class="col-md-9">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <?= $form->field('title'); ?>
+                            </div>
+                            <div class="col-md-6">
+                                <?= $form->field('slug'); ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <?= $form->field('content') ?>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <?php if(module_exists('admin-venue-category')): ?>
+                                    <?= $form->field('category', $opts['category']) ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-4">
+                                <?php if(module_exists('admin-venue-facility')): ?>
+                                    <?= $form->field('facility', $opts['facility']) ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="col-md-4">
+                                <?php if(module_exists('admin-venue-food')): ?>
+                                    <?= $form->field('food', $opts['food']) ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Pricing</h5>
+                                <?= $form->field('prices-currency') ?>
+                                <?= $form->field('prices-min') ?>
+                                <?= $form->field('prices-max') ?>
+                            </div>
+                        </div>
+                         <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Work Time</h5>
+                                <?= $form->field('open_hours-open') ?>
+                                <?= $form->field('open_hours-close') ?>
+                                <?= $form->field('open_days') ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Contact</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <?= $form->field('contact-map') ?>
+                                        <?= $form->field('contact-phone') ?>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <?= $form->field('contact-address') ?>
+                                        <?= $form->field('contact-email') ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Social Accounts</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <?= $form->field('socials-facebook') ?>
+                                        <?= $form->field('socials-instagram') ?>
+                                        <?= $form->field('socials-youtube') ?>
+                                        <?= $form->field('socials-vimeo') ?>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <?= $form->field('socials-twitter') ?>
+                                        <?= $form->field('socials-gplus') ?>
+                                        <?= $form->field('socials-soundcloud') ?>
+                                        <?= $form->field('socials-website') ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <?= $form->field('logo') ?>
+                        <?= $form->field('cover-url') ?>
+                        <?= $form->field('cover-label') ?>
+                        <hr>
+                        <?= $this->partial('site-meta/meta'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
