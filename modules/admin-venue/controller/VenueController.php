@@ -134,4 +134,34 @@ class VenueController extends \Admin\Controller
 
         $this->resp('venue/index', $params);
     }
+
+    public function removeAction(){
+        if(!$this->user->isLogin())
+            return $this->loginFirst(1);
+        if(!$this->can_i->manage_venue)
+            return $this->show404();
+
+        $id     = $this->req->param->id;
+        $venue  = Venue::getOne(['id'=>$id]);
+        $next   = $this->router->to('adminVenue');
+        $form   = new Form('admin.venue.index');
+
+        if(!$form->csrfTest('noob'))
+            return $this->res->redirect($next);
+
+        // add the log
+        $this->addLog([
+            'user'   => $this->user->id,
+            'object' => $id,
+            'parent' => 0,
+            'method' => 3,
+            'type'   => 'venue',
+            'original' => $venue,
+            'changes'  => null
+        ]);
+
+        Venue::remove(['id'=>$id]);
+
+        $this->res->redirect($next);
+    }
 }
