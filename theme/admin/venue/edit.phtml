@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-body">
                         <?= $form->field('logo') ?>
                         <?= $form->field('cover-url') ?>
@@ -119,6 +119,17 @@
                         <?= $this->partial('site-meta/meta'); ?>
                     </div>
                 </div>
+                <?php if(module_exists('admin-venue-gallery')): ?>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="card-title">Galleries</div>
+                            <?= $form->field('gallery_food', $opts['gallery_food']) ?>
+                            <?= $form->field('gallery_atmosphere', $opts['gallery_atmosphere']) ?>
+                            <?= $form->field('gallery_employee', $opts['gallery_employee']) ?>
+                            <?= $form->field('gallery_property', $opts['gallery_property']) ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>

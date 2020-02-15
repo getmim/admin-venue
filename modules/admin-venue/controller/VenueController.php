@@ -58,7 +58,12 @@ class VenueController extends \Admin\Controller
 
             'category'   => ['venue-category',  null, 'format', 'all', 'name'],
             'facility'   => ['venue-facility',  null, 'format', 'all', 'name'],
-            'food'       => ['venue-food',      null, 'format', 'all', 'name']
+            'food'       => ['venue-food',      null, 'format', 'all', 'name'],
+
+            'gallery_food'       => ['admin-venue-gallery', null, 'format', 'active', 'title'],
+            'gallery_atmosphere' => ['admin-venue-gallery', null, 'format', 'active', 'title'],
+            'gallery_employee'   => ['admin-venue-gallery', null, 'format', 'active', 'title'],
+            'gallery_property'   => ['admin-venue-gallery', null, 'format', 'active', 'title']
         ];
 
         $combiner = new Combiner($id, $c_opts, 'venue');
