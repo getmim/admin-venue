@@ -32,7 +32,9 @@ class VenueController extends \Admin\Controller
         if(!$this->can_i->manage_venue)
             return $this->show404();
 
-        $venue = (object)[];
+        $venue = (object)[
+            'status' => 1
+        ];
 
         $id = $this->req->param->id;
         if($id){
@@ -76,6 +78,17 @@ class VenueController extends \Admin\Controller
 
         $valid = $combiner->finalize($valid);
 
+        if (isset($valid->status)) {
+            if (!$this->can_i->publish_venue) {
+                unset($valid->status);
+            }else{
+                if ($valid->status == 2 && $valid->status != $venue->status){
+                    $valid->publisher = $this->user->id;
+                    $valid->published = date('Y-m-d H:i:s');
+                }
+            }
+        }
+
         if($id){
             if(!Venue::set((array)$valid, ['id'=>$id]))
                 deb(Venue::lastError());
@@ -112,6 +125,11 @@ class VenueController extends \Admin\Controller
         if($q = $this->req->getQuery('q'))
             $pcond['q'] = $cond['q'] = $q;
 
+        if($status = $this->req->getQuery('status'))
+            $pcond['status'] = $cond['status'] = $status;
+        else
+            $cond['status'] = ['__op', '>', 0];
+
         list($page, $rpp) = $this->req->getPager(25, 50);
 
         $venues = Venue::get($cond, $rpp, $page, ['title'=>true]) ?? [];
@@ -143,7 +161,7 @@ class VenueController extends \Admin\Controller
     public function removeAction(){
         if(!$this->user->isLogin())
             return $this->loginFirst(1);
-        if(!$this->can_i->manage_venue)
+        if(!$this->can_i->remove_venue)
             return $this->show404();
 
         $id     = $this->req->param->id;

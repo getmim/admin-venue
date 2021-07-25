@@ -18,6 +18,7 @@
                 <form method="GET" class="card-body">
                     <h5 class="card-title">Search</h5>
                     <?= $form->field('q') ?>
+                    <?= $form->field('status') ?>
                     <div class="text-right">
                         <button class="btn btn-primary">Find</button>
                     </div>
@@ -44,11 +45,12 @@
                                         <a href="<?= $this->router->to('adminVenueEdit', ['id'=>$venue->id]) ?>" class="btn btn-secondary" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <?php if(isset($venue->page)): ?>
+                                        <?php if($venue->status->value == 3 && isset($venue->page)): ?>
                                             <a href="<?= $venue->page ?>" class="btn btn-secondary" title="View Page" target="_blank">
                                                 <i class="fas fa-external-link-square-alt"></i>
                                             </a>
                                         <?php endif; ?>
+                                        <?php if($this->can_i->remove_venue): ?>
                                         <div class="btn-group btn-group-sm" role="group">
                                             <button id="venue-action-<?= $venue->id ?>" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                             <div class="dropdown-menu" aria-labelledby="venue-action-<?= $venue->id ?>">
@@ -59,6 +61,7 @@
                                                     href="<?= $this->router->to('adminVenueRemove', ['id'=>$venue->id], ['noob'=>$csrf]) ?>">Delete</a>
                                             </div>
                                         </div>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -72,6 +75,12 @@
                                     <i class="fas fa-user"></i>
                                     <?= $venue->user->fullname->safe ?>
                                 </span>
+                                <?php if($venue->status->value == 1): ?>
+                                    &middot;
+                                    <span title="Status" class="text-warning">
+                                        Draft
+                                    </span>
+                                <?php endif; ?>
                             </small>
                         </li>
                     <?php endforeach; ?>

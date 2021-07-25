@@ -281,6 +281,15 @@ return [
                         'url' => TRUE
                     ]
                 ],
+                'status' => [
+                    'label' => 'Status',
+                    'type' => 'select',
+                    'options' => [
+                        '1' => 'Draft',
+                        '2' => 'Publish'
+                    ],
+                    'rules' => []
+                ],
                 'meta-schema' => [
                     'options' => [
                         'LocalBusiness' => 'LocalBusiness'
@@ -292,6 +301,17 @@ return [
                     'label' => 'Search',
                     'type' => 'search',
                     'nolabel' => TRUE,
+                    'rules' => []
+                ],
+                'status' => [
+                    'label' => 'Status',
+                    'type' => 'select',
+                    'nolabel' => TRUE,
+                    'options' => [
+                        '0' => 'All',
+                        '1' => 'Draft',
+                        '2' => 'Published'
+                    ],
                     'rules' => []
                 ]
             ]

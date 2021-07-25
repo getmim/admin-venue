@@ -19,14 +19,30 @@
             <div class="col-md-9">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <?= $form->field('title'); ?>
+                        <?php if($this->can_i->publish_venue): ?>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <?= $form->field('title'); ?>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <?= $form->field('slug'); ?>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field('slug'); ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field('status'); ?>
+                                </div>
                             </div>
-                        </div>
+                        <?php else: ?>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <?= $form->field('title'); ?>
+                                </div>
+                                <div class="col-md-6">
+                                    <?= $form->field('slug'); ?>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                         <div class="row">
                             <div class="col-md-12">
                                 <?= $form->field('content') ?>
