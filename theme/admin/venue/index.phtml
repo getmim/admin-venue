@@ -45,7 +45,7 @@
                                         <a href="<?= $this->router->to('adminVenueEdit', ['id'=>$venue->id]) ?>" class="btn btn-secondary" title="Edit">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <?php if($venue->status->value == 3 && isset($venue->page)): ?>
+                                        <?php if($venue->status->value == 2 && isset($venue->page)): ?>
                                             <a href="<?= $venue->page ?>" class="btn btn-secondary" title="View Page" target="_blank">
                                                 <i class="fas fa-external-link-square-alt"></i>
                                             </a>

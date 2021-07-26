@@ -286,7 +286,7 @@ return [
                     'type' => 'select',
                     'options' => [
                         '1' => 'Draft',
-                        '2' => 'Publish'
+                        '2' => 'Published'
                     ],
                     'rules' => []
                 ],
